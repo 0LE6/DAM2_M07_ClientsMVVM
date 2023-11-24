@@ -19,6 +19,7 @@ namespace ClientsMVVM.ViewModel
         string saldo;
         ObservableCollection<Client> clients;
         IRepositoriDeClients repositoriDeClients;
+        int posicio;
 
         public ICommand CreaClientsCommand { get; set; }
         public ICommand AfegeixClientCommand { get; set; }
@@ -42,8 +43,8 @@ namespace ClientsMVVM.ViewModel
         {
             repositoriDeClients = Repo.ObreBDClients();
 
-            // Lo haremos una vez y luego lo quitamos
-            repositoriDeClients.CreaClients(30);
+            //// Lo haremos una vez y luego lo quitamos (en este punto lo comentamos para que no nos aparezcan los 30 creados, sino vacío y luego le demos a crear)
+            //repositoriDeClients.CreaClients(30);
 
             // Los obtenemos después de crearlos
             Clients = repositoriDeClients.Obten();
@@ -54,6 +55,12 @@ namespace ClientsMVVM.ViewModel
                 nClients => CreaClients(Convert.ToInt32(nClients)),
                 nClients => Clients.Count != 0
                 ); // pasamos string que luego convertiremos a int, la segunta parte es un CanExecute (!= para que pueda eliminar, luego se cambiará)
+
+            // Selected index del listBox
+            //EliminaClientCommand = new RelayCommand(
+            //    obj => 
+            //    );
+
 
             #endregion
         }
@@ -105,7 +112,7 @@ namespace ClientsMVVM.ViewModel
         } 
         public string NomComplet { get => Nom + " " + Cognom; } // así ya devuelve el cambio del nombre completo
 
-
+        public int Posicio { get => posicio; set { SetProperty(ref posicio, value); } }
 
         /* Haciéndolo así te aparece en el preview los valores por defecto
          
