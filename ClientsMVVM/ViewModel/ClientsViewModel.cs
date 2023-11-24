@@ -18,7 +18,7 @@ namespace ClientsMVVM.ViewModel
         string saldo;
 
         // Nos lo genera la interficie
-        public event PropertyChangedEventHandler? PropertyChanged;
+        //public event PropertyChangedEventHandler? PropertyChanged;
 
         // lo siguiente que creamos es esto:
         //private void OnCanviEnLaPropietat([System.Runtime.CompilerServices.CallerMemberName] string nomPropietat = "") // para no volver a ponerlo
@@ -46,13 +46,15 @@ namespace ClientsMVVM.ViewModel
         {  
             get => nom; 
             set 
-            { 
-                if (nom != value) // entra si se ha hecho un cambio a algo nuevo (es la forma estandar, luego con ObserbableBase como abajo se usa, es mas sencillo)
-                {
-                    nom = value; 
-                    NotifyPropertyChanged(nameof(Nom));
-                    NotifyPropertyChanged(nameof(NomComplet)); 
-                }                
+            {
+                SetProperty(ref nom, value);
+                NotifyPropertyChanged(nameof(NomComplet));
+                //if (nom != value) // entra si se ha hecho un cambio a algo nuevo (es la forma estandar, luego con ObserbableBase como abajo se usa, es mas sencillo)
+                //{
+                //    nom = value; 
+                //    NotifyPropertyChanged(nameof(Nom));
+                //    NotifyPropertyChanged(nameof(NomComplet)); 
+                //}                
             } 
         } // primer ejemplo del uso de cuando se hace un cambio que se sepa 
 
@@ -75,6 +77,7 @@ namespace ClientsMVVM.ViewModel
             public string Cognom { get; set; } = "Pomma";
             public string Saldo { get; set; } = "6969";// string porque del textbox sale como tal 
             public string NomComplet { get => Nom + " " + Cognom; } // así ya devuelve el cambio del nombre completo
-         */
+
+        */
     }
 }
