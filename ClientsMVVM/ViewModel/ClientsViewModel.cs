@@ -17,7 +17,7 @@ namespace ClientsMVVM.ViewModel
         string nom;
         string cognom;
         string saldo;
-
+        IRepositoriDeClients repositoriDeClients;
         public ICommand CreaClientsCommand { get; set; }
         public ICommand AfegeixClientCommand { get; set; }
         public ICommand EditaClientCommand { get; set; }
@@ -38,12 +38,28 @@ namespace ClientsMVVM.ViewModel
 
         public ClientsViewModel() 
         {
-            IRepositoriDeClients repositoriDeClients = Repo.ObreBDClients();
+            repositoriDeClients = Repo.ObreBDClients();
 
             // Lo haremos una vez y luego lo quitamos
             repositoriDeClients.CreaClients(30);
 
             // Los obtenemos después de crearlos
+            Clients = repositoriDeClients.Obten();
+
+            #region COMMANDS
+
+            CreaClientsCommand = new RelayCommand<string>(
+                nClients => CreaClients(Convert.ToInt32(nClients)),
+                nClients => Clients.Count != 0
+                ); // pasamos string que luego convertiremos a int, la segunta parte es un CanExecute (!= para que pueda eliminar)
+
+            #endregion
+        }
+        // otra forma de hacerlo:
+        // nClients => repositoriDeClients.CreaClients(Convert.ToInt32(nClients)));
+        private void CreaClients(int nClients)
+        {
+            repositoriDeClients.CreaClients(nClients);
             Clients = repositoriDeClients.Obten();
         }
 

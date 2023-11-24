@@ -37,7 +37,7 @@
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
-            <Button Content="Crea clients" />
+            <Button Content="Crea clients" Command="{Binding CreaClientsCommand}" CommandParameter="3"/> <!-- by default 3 -->
             <Separator/>
             <Button Content="Afegeix" />
             <Button Content="Edita" />
