@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace ClientsMVVM.Repositiori
+namespace ClientsMVVM.Repositori
 {
-    public static class Repositori
+    public static class Repo
     {
         private static IRepositoriDeClients? repositoriDeClients = null;
         public static IRepositoriDeClients ObreBDClients()

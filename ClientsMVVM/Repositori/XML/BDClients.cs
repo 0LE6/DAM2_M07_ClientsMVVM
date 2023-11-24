@@ -1,5 +1,5 @@
 ﻿using ClientsMVVM.Model;
-using ClientsMVVM.Repositiori;
+using ClientsMVVM.Repositori;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

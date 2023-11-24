@@ -1,7 +1,7 @@
 ﻿using ClientsMVVM.Model;
 using System.Collections.ObjectModel;
 
-namespace ClientsMVVM.Repositiori
+namespace ClientsMVVM.Repositori
 {
     public interface IRepositoriDeClients
     {
