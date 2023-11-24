@@ -21,7 +21,7 @@ namespace ClientsMVVM.ViewModel
         public event PropertyChangedEventHandler? PropertyChanged;
 
         // lo siguiente que creamos es esto:
-        private void OnCanviEnLaPropietat(string nomPropietat = "")
+        private void OnCanviEnLaPropietat([System.Runtime.CompilerServices.CallerMemberName] string nomPropietat = "") // para no volver a ponerlo
         {
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropietat));
@@ -42,9 +42,12 @@ namespace ClientsMVVM.ViewModel
         public ObservableCollection<Client> Clients { get; set; }
 
         // Añadidos para poder gestionar lo que se escribe en los textbox
-        public string Nom {  get => nom; set { nom = value; OnCanviEnLaPropietat(nameof(Nom)); } } // primer ejemplo del uso de cuando se hace un cambio que se sepa 
-        public string Cognom { get; set; } = "Pomma";
-        public string Saldo { get; set; } = "6969";// string porque del textbox sale como tal 
+        public string Nom {  get => nom; set { nom = value; OnCanviEnLaPropietat(nameof(Nom)); OnCanviEnLaPropietat(nameof(NomComplet)); } } // primer ejemplo del uso de cuando se hace un cambio que se sepa 
+
+        // habiendo puesto lo raro de ante [System.Runtime.CompilerServices.CallerMemberName] no hace falta ponerlo
+        public string Cognom { get => cognom; 
+            set { cognom = value; OnCanviEnLaPropietat(); OnCanviEnLaPropietat(nameof(NomComplet)); } }
+        public string Saldo { get; set; } = "6969";
         public string NomComplet { get => Nom + " " + Cognom; } // así ya devuelve el cambio del nombre completo
 
         
