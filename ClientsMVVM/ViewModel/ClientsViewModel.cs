@@ -26,9 +26,17 @@ namespace ClientsMVVM.ViewModel
         public ObservableCollection<Client> Clients { get; set; }
 
         // Añadidos para poder gestionar lo que se escribe en los textbox
-        public string Nom {  get; set; }
-        public string Cognom {  get; set; }
-        public string Saldo { get; set; } // string porque del textbox sale como tal 
+        public string Nom {  get; set; } = "Pere";
+        public string Cognom { get; set; } = "Pomma";
+        public string Saldo { get; set; } = "6969";// string porque del textbox sale como tal 
         public string NomComplet { get => Nom + " " + Cognom; } // así ya devuelve el cambio del nombre completo
+
+        /* Haciéndolo así te aparece en el preview los valores por defecto
+         
+            public string Nom {  get; set; } = "Pere";
+            public string Cognom { get; set; } = "Pomma";
+            public string Saldo { get; set; } = "6969";// string porque del textbox sale como tal 
+            public string NomComplet { get => Nom + " " + Cognom; } // así ya devuelve el cambio del nombre completo
+         */
     }
 }

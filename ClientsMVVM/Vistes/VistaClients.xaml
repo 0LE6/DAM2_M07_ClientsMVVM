@@ -58,7 +58,7 @@
                 </DockPanel>
                 <DockPanel >
                     <TextBlock DockPanel.Dock="Left" Text="Saldo:" Style="{StaticResource ResourceKey=EtiquetaStyle}"/>
-                    <TextBox DockPanel.Dock="Left" Text="" Style="{StaticResource ResourceKey=ValorStyle}"/>
+                    <TextBox DockPanel.Dock="Left" Text="{Binding Saldo}" Style="{StaticResource ResourceKey=ValorStyle}"/>
                 </DockPanel>
 
             </StackPanel>
