@@ -13,6 +13,10 @@ namespace ClientsMVVM.ViewModel
     // Añadimos la interficie de que nuestra propiedad sabe notificar los cambios
     public class ClientsViewModel : INotifyPropertyChanged
     {
+        string nom;
+        string cognom;
+        string saldo;
+
         // Nos lo genera la interficie
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -38,7 +42,7 @@ namespace ClientsMVVM.ViewModel
         public ObservableCollection<Client> Clients { get; set; }
 
         // Añadidos para poder gestionar lo que se escribe en los textbox
-        public string Nom {  get; set; } = "Pere";
+        public string Nom {  get => nom; set { nom = value; OnCanviEnLaPropietat(nameof(Nom)); } } 
         public string Cognom { get; set; } = "Pomma";
         public string Saldo { get; set; } = "6969";// string porque del textbox sale como tal 
         public string NomComplet { get => Nom + " " + Cognom; } // así ya devuelve el cambio del nombre completo
