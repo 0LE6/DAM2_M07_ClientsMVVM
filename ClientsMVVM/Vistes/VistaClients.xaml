@@ -47,14 +47,14 @@
         </ToolBar>
         <StackPanel Grid.Row="1" VerticalAlignment="Center">
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="20">
-                <TextBlock DockPanel.Dock="Top" Text="" Style="{StaticResource ResourceKey=ValorStyle}"/>
+                <TextBlock DockPanel.Dock="Top" Text="{Binding NomComplet}" Style="{StaticResource ResourceKey=ValorStyle}"/>
                 <DockPanel >
                     <TextBlock DockPanel.Dock="Left" Text="Nom:" Style="{StaticResource ResourceKey=EtiquetaStyle}"/>
-                    <TextBox DockPanel.Dock="Left" Text="" Style="{StaticResource ResourceKey=ValorStyle}" HorizontalAlignment="Stretch"/>
+                    <TextBox DockPanel.Dock="Left" Text="{Binding Nom}" Style="{StaticResource ResourceKey=ValorStyle}" HorizontalAlignment="Stretch"/>
                 </DockPanel>
                 <DockPanel >
                     <TextBlock DockPanel.Dock="Left" Text="Cognom:" Style="{StaticResource ResourceKey=EtiquetaStyle}"/>
-                    <TextBox DockPanel.Dock="Left" Text="" Style="{StaticResource ResourceKey=ValorStyle}"/>
+                    <TextBox DockPanel.Dock="Left" Text="{Binding Cognom}" Style="{StaticResource ResourceKey=ValorStyle}"/>
                 </DockPanel>
                 <DockPanel >
                     <TextBlock DockPanel.Dock="Left" Text="Saldo:" Style="{StaticResource ResourceKey=EtiquetaStyle}"/>
