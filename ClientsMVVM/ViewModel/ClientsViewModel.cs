@@ -57,19 +57,30 @@ namespace ClientsMVVM.ViewModel
                 ); // pasamos string que luego convertiremos a int, la segunta parte es un CanExecute (!= para que pueda eliminar, luego se cambiará)
 
             // Selected index del listBox
-            //EliminaClientCommand = new RelayCommand(
-            //    obj => 
-            //    );
+            EliminaClientCommand = new RelayCommand(
+                obj => EliminaClient()//repositoriDeClients.Esborra(Clients[Posicio].Id) // le pasamos la id del cliente segun su posicion de la lista 
+                );
 
 
             #endregion
         }
+
+        private void EliminaClient()
+        {
+            repositoriDeClients.Esborra(Clients[Posicio].Id);
+            if (posicio == Clients.Count - 1)
+            {
+                Posicio--; // que se quede en la anterior
+            }
+            Clients = repositoriDeClients.Obten(); // refrescar lista de clients
+        }
+
         // otra forma de hacerlo:
         // nClients => repositoriDeClients.CreaClients(Convert.ToInt32(nClients)));
         private void CreaClients(int nClients)
         {
             repositoriDeClients.CreaClients(nClients);
-            Clients = repositoriDeClients.Obten();
+            Clients = repositoriDeClients.Obten(); // refrescar lista de clients
         }
 
         #region PROPIEDADES

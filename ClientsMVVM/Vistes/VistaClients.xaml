@@ -69,7 +69,8 @@
         <GridSplitter Grid.Column="1" Grid.RowSpan="4" Width="5" VerticalAlignment="Stretch"/>
         <ListBox Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" 
                  ItemsSource="{Binding Clients}"
+                 SelectedIndex="{Binding Posicio}"
                  x:Name="lstClients" HorizontalContentAlignment="Stretch"/>
-
+        <!-- importante el SelectedIndex para saber la poscion del que se selecciona -->
     </Grid>
 </Window>
