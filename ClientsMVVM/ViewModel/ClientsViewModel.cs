@@ -53,7 +53,7 @@ namespace ClientsMVVM.ViewModel
 
             CreaClientsCommand = new RelayCommand<string>(
                 nClients => CreaClients(Convert.ToInt32(nClients)),
-                nClients => Clients.Count != 0
+                nClients => Clients.Count == 0
                 ); // pasamos string que luego convertiremos a int, la segunta parte es un CanExecute (!= para que pueda eliminar, luego se cambiará)
 
             // Selected index del listBox
