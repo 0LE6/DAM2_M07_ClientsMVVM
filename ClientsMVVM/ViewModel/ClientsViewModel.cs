@@ -64,22 +64,37 @@ namespace ClientsMVVM.ViewModel
 
             AfegeixClientCommand = new RelayCommand(
                 obj => AfageixClientNou(),
-                obj => 
+                obj => EsValid
                 );
 
 
             #endregion
         }
 
+        private bool EsValid 
+        { 
+            get {
+                decimal saldo;
+
+                return (
+                    !string.IsNullOrEmpty(Nom) &&
+                    !string.IsNullOrEmpty(Cognom) &&
+                    Decimal.TryParse(Saldo, out saldo)
+                    );
+            } 
+        }
+
         private void AfageixClientNou()
         {
             Client clientNou = new Client()
             {
-                Id = Guid.NewGuid().ToString(), // lol
+                Id = Guid.NewGuid().ToString(), // lol ... genera clave aleatoria
                 Nom = Nom,
                 Cognom = Cognom,
                 Saldo = Convert.ToDecimal(Saldo)
             };
+            repositoriDeClients.Afegeix(clientNou);
+            Clients = repositoriDeClients.Obten(); // refrescar lista de clients
         }
 
         private void EliminaClient()
