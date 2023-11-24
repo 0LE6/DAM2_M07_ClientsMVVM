@@ -3,14 +3,25 @@ using ClientsMVVM.Repositori;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ClientsMVVM.ViewModel
 {
-    public class ClientsViewModel
+    // Añadimos la interficie de que neustra propiedad sabe notificar los cambios
+    public class ClientsViewModel : INotifyPropertyChanged
     {
+        // Nos lo genera la interficie
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        // lo siguiente que creamos es esto:
+        private void OnCanviEnLaPropietat(string nomPropietat = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropietat));
+        }
+
         public ClientsViewModel() 
         {
             IRepositoriDeClients repositoriDeClients = Repo.ObreBDClients();
@@ -30,6 +41,8 @@ namespace ClientsMVVM.ViewModel
         public string Cognom { get; set; } = "Pomma";
         public string Saldo { get; set; } = "6969";// string porque del textbox sale como tal 
         public string NomComplet { get => Nom + " " + Cognom; } // así ya devuelve el cambio del nombre completo
+
+        
 
         /* Haciéndolo así te aparece en el preview los valores por defecto
          
