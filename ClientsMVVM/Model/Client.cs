@@ -17,5 +17,10 @@ namespace ClientsMVVM.Model
         public string Nom { get => nom; set => nom = value; }
         public string Cognom { get => cognom; set => cognom = value; }
         public decimal Saldo { get => saldo; set => saldo = value; }
+
+        public override string ToString()
+        {
+            return Nom + " " + Cognom;
+        }
     }
 }

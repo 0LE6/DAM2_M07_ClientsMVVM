@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientsMVVM.Vistes"
-        xmlns:vm="clr-namespace:ClientsMVVM.ViewModel"
+        xmlns:viewmodel="clr-namespace:ClientsMVVM.ViewModel"
         mc:Ignorable="d"
-        Title="VistaClients" Height="450" Width="800">
+        Title="VistaClients" Height="450" Width="800" 
+        > 
+    <!-- importante para hacer el new -->
+    <Window.DataContext>
+        <viewmodel:ClientsViewModel/>
+    </Window.DataContext>
+    
     <Window.Resources>
         <Style x:Key="EtiquetaStyle">
             <Setter Property="Control.FontSize" Value="20"/>
@@ -62,6 +68,7 @@
         
         <GridSplitter Grid.Column="1" Grid.RowSpan="4" Width="5" VerticalAlignment="Stretch"/>
         <ListBox Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" 
+                 ItemsSource="{Binding Clients}"
                  x:Name="lstClients" HorizontalContentAlignment="Stretch"/>
 
     </Grid>
