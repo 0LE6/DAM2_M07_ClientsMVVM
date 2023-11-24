@@ -17,7 +17,9 @@ namespace ClientsMVVM.ViewModel
         string nom;
         string cognom;
         string saldo;
+        ObservableCollection<Client> clients;
         IRepositoriDeClients repositoriDeClients;
+
         public ICommand CreaClientsCommand { get; set; }
         public ICommand AfegeixClientCommand { get; set; }
         public ICommand EditaClientCommand { get; set; }
@@ -51,7 +53,7 @@ namespace ClientsMVVM.ViewModel
             CreaClientsCommand = new RelayCommand<string>(
                 nClients => CreaClients(Convert.ToInt32(nClients)),
                 nClients => Clients.Count != 0
-                ); // pasamos string que luego convertiremos a int, la segunta parte es un CanExecute (!= para que pueda eliminar)
+                ); // pasamos string que luego convertiremos a int, la segunta parte es un CanExecute (!= para que pueda eliminar, luego se cambiará)
 
             #endregion
         }
@@ -66,7 +68,14 @@ namespace ClientsMVVM.ViewModel
         #region PROPIEDADES
 
         // Nuestras propiedaades
-        public ObservableCollection<Client> Clients { get; set; }
+        public ObservableCollection<Client> Clients  // esto para que vez de cargarnos los clientes que teníamos y ponerlos los nuevos, nos los añada
+        { 
+            get => clients; 
+            set
+            {
+                SetProperty(ref clients, value);
+            }
+        }
 
         // Añadidos para poder gestionar lo que se escribe en los textbox
         public string Nom 
