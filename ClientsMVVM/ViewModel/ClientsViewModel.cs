@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace ClientsMVVM.ViewModel
 {
     // Añadimos la interficie de que nuestra propiedad sabe notificar los cambios
-    public class ClientsViewModel : INotifyPropertyChanged
+    public class ClientsViewModel : ObservableBase // mirar este cambios en los commits, antes era -> INotifyPropertyChanged
     {
         string nom;
         string cognom;
@@ -59,7 +59,14 @@ namespace ClientsMVVM.ViewModel
         // habiendo puesto lo raro de ante [System.Runtime.CompilerServices.CallerMemberName] no hace falta ponerlo
         public string Cognom { get => cognom; 
             set { cognom = value; OnCanviEnLaPropietat(); OnCanviEnLaPropietat(nameof(NomComplet)); } }
-        public string Saldo { get; set; } = "6969";
+        public string Saldo 
+        { 
+            get => saldo; 
+            set
+            {
+
+            }
+        } 
         public string NomComplet { get => Nom + " " + Cognom; } // así ya devuelve el cambio del nombre completo
 
         
