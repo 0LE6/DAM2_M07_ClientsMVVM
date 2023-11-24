@@ -13,8 +13,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
-
 </Project>
