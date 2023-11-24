@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ClientsMVVM.ViewModel
 {
-    // Añadimos la interficie de que neustra propiedad sabe notificar los cambios
+    // Añadimos la interficie de que nuestra propiedad sabe notificar los cambios
     public class ClientsViewModel : INotifyPropertyChanged
     {
         // Nos lo genera la interficie
@@ -19,6 +19,7 @@ namespace ClientsMVVM.ViewModel
         // lo siguiente que creamos es esto:
         private void OnCanviEnLaPropietat(string nomPropietat = "")
         {
+
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropietat));
         }
 
