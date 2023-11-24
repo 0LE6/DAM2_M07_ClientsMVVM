@@ -43,7 +43,7 @@
             <Button Content="Edita" />
             <Button Content="Confirma" />
             <Button Content="Descarta" />
-            <Button Content="Elimina" />
+            <Button Content="Elimina" Command="{Binding EliminaClientCommand}"/>
         </ToolBar>
         <StackPanel Grid.Row="1" VerticalAlignment="Center">
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="20">

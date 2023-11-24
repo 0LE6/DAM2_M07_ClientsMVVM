@@ -58,11 +58,28 @@ namespace ClientsMVVM.ViewModel
 
             // Selected index del listBox
             EliminaClientCommand = new RelayCommand(
-                obj => EliminaClient()//repositoriDeClients.Esborra(Clients[Posicio].Id) // le pasamos la id del cliente segun su posicion de la lista 
+                obj => EliminaClient(), //repositoriDeClients.Esborra(Clients[Posicio].Id) // le pasamos la id del cliente segun su posicion de la lista 
+                obj => Posicio != -1 // CanExecute siempre y cuando haya alguno seleccionado, -1 significa que no hay ninguno
+                );
+
+            AfegeixClientCommand = new RelayCommand(
+                obj => AfageixClientNou(),
+                obj => 
                 );
 
 
             #endregion
+        }
+
+        private void AfageixClientNou()
+        {
+            Client clientNou = new Client()
+            {
+                Id = Guid.NewGuid().ToString(), // lol
+                Nom = Nom,
+                Cognom = Cognom,
+                Saldo = Convert.ToDecimal(Saldo)
+            };
         }
 
         private void EliminaClient()
