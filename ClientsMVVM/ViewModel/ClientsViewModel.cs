@@ -42,7 +42,7 @@ namespace ClientsMVVM.ViewModel
         public ObservableCollection<Client> Clients { get; set; }
 
         // Añadidos para poder gestionar lo que se escribe en los textbox
-        public string Nom {  get => nom; set { nom = value; OnCanviEnLaPropietat(nameof(Nom)); } } 
+        public string Nom {  get => nom; set { nom = value; OnCanviEnLaPropietat(nameof(Nom)); } } // primer ejemplo del uso de cuando se hace un cambio que se sepa 
         public string Cognom { get; set; } = "Pomma";
         public string Saldo { get; set; } = "6969";// string porque del textbox sale como tal 
         public string NomComplet { get => Nom + " " + Cognom; } // así ya devuelve el cambio del nombre completo
