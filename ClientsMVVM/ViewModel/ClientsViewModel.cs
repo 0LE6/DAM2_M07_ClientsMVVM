@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ClientsMVVM.ViewModel
 {
@@ -16,6 +17,13 @@ namespace ClientsMVVM.ViewModel
         string nom;
         string cognom;
         string saldo;
+
+        public ICommand CreaClientsCommand { get; set; }
+        public ICommand AfegeixClientCommand { get; set; }
+        public ICommand EditaClientCommand { get; set; }
+        public ICommand ConfirmaEdicioCommand { get; set; }
+        public ICommand DescartaEdicioCommand { get; set; }
+        public ICommand EliminaClientCommand { get; set; }
 
         // Nos lo genera la interficie
         //public event PropertyChangedEventHandler? PropertyChanged;
@@ -27,6 +35,7 @@ namespace ClientsMVVM.ViewModel
         //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropietat));
         //}
 
+
         public ClientsViewModel() 
         {
             IRepositoriDeClients repositoriDeClients = Repo.ObreBDClients();
@@ -37,6 +46,8 @@ namespace ClientsMVVM.ViewModel
             // Los obtenemos después de crearlos
             Clients = repositoriDeClients.Obten();
         }
+
+        #region PROPIEDADES
 
         // Nuestras propiedaades
         public ObservableCollection<Client> Clients { get; set; }
@@ -69,7 +80,7 @@ namespace ClientsMVVM.ViewModel
         } 
         public string NomComplet { get => Nom + " " + Cognom; } // así ya devuelve el cambio del nombre completo
 
-        
+
 
         /* Haciéndolo así te aparece en el preview los valores por defecto
          
@@ -79,5 +90,6 @@ namespace ClientsMVVM.ViewModel
             public string NomComplet { get => Nom + " " + Cognom; } // así ya devuelve el cambio del nombre completo
 
         */
+        #endregion
     }
 }
