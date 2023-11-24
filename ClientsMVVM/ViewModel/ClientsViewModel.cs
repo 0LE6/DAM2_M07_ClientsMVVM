@@ -24,5 +24,11 @@ namespace ClientsMVVM.ViewModel
 
         // Nuestras propiedaades
         public ObservableCollection<Client> Clients { get; set; }
+
+        // Añadidos para poder gestionar lo que se escribe en los textbox
+        public string Nom {  get; set; }
+        public string Cognom {  get; set; }
+        public string Saldo { get; set; }
+        public string NomComplet { get; set; }
     }
 }

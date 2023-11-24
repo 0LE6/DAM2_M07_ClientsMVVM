@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="VistaClients" Height="450" Width="800" 
         > 
-    <!-- importante para hacer el new -->
+    <!-- importante para hacer el new, al principio parece que no funciona, pero funciona  -->
     <Window.DataContext>
         <viewmodel:ClientsViewModel/>
     </Window.DataContext>
