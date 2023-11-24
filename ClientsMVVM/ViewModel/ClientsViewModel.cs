@@ -21,11 +21,11 @@ namespace ClientsMVVM.ViewModel
         public event PropertyChangedEventHandler? PropertyChanged;
 
         // lo siguiente que creamos es esto:
-        private void OnCanviEnLaPropietat([System.Runtime.CompilerServices.CallerMemberName] string nomPropietat = "") // para no volver a ponerlo
-        {
+        //private void OnCanviEnLaPropietat([System.Runtime.CompilerServices.CallerMemberName] string nomPropietat = "") // para no volver a ponerlo
+        //{
 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropietat));
-        }
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropietat));
+        //}
 
         public ClientsViewModel() 
         {
@@ -50,15 +50,15 @@ namespace ClientsMVVM.ViewModel
                 if (nom != value) // entra si se ha hecho un cambio a algo nuevo
                 {
                     nom = value; 
-                    OnCanviEnLaPropietat(nameof(Nom)); 
-                    OnCanviEnLaPropietat(nameof(NomComplet)); 
+                    NotifyPropertyChanged(nameof(Nom));
+                    NotifyPropertyChanged(nameof(NomComplet)); 
                 }                
             } 
         } // primer ejemplo del uso de cuando se hace un cambio que se sepa 
 
         // habiendo puesto lo raro de ante [System.Runtime.CompilerServices.CallerMemberName] no hace falta ponerlo
         public string Cognom { get => cognom; 
-            set { cognom = value; OnCanviEnLaPropietat(); OnCanviEnLaPropietat(nameof(NomComplet)); } }
+            set { cognom = value; NotifyPropertyChanged(""); NotifyPropertyChanged(nameof(NomComplet)); } } // !!
         public string Saldo 
         { 
             get => saldo; 
