@@ -9,10 +9,12 @@ namespace ClientsMVVM.ViewModel
 {
     public class RelayCommand : RelayCommand<object>
     {
+        // 2 constructores, uno con un action, que hacer con ese command
         public RelayCommand(Action<object> execute) : base(execute)
         {
         }
 
+        // el Executed y el canExecute
         public RelayCommand(Action<object> execute, Predicate<object> canExecute) : base(execute, canExecute)
         {
         }
