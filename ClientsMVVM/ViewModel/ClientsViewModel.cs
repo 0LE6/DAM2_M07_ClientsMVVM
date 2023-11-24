@@ -14,7 +14,14 @@ namespace ClientsMVVM.ViewModel
         public ClientsViewModel() 
         {
             IRepositoriDeClients repositoriDeClients = Repo.ObreBDClients();
+
+            // Lo haremos una vez y luego lo quitamos
+            repositoriDeClients.CreaClients(30);
+
+            // Los obtenemos después de crearlos
+            Clients = repositoriDeClients.Obten();
         }
+
         // Nuestras propiedaades
         public ObservableCollection<Client> Clients { get; set; }
     }
