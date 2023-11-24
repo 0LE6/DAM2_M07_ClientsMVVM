@@ -47,7 +47,7 @@ namespace ClientsMVVM.ViewModel
             get => nom; 
             set 
             { 
-                if (nom != value) // entra si se ha hecho un cambio a algo nuevo
+                if (nom != value) // entra si se ha hecho un cambio a algo nuevo (es la forma estandar, luego con ObserbableBase como abajo se usa, es mas sencillo)
                 {
                     nom = value; 
                     NotifyPropertyChanged(nameof(Nom));
@@ -62,10 +62,8 @@ namespace ClientsMVVM.ViewModel
         public string Saldo 
         { 
             get => saldo; 
-            set
-            {
-
-            }
+            set => SetProperty(ref saldo, value); // este cambio tb es por la implmenetación de ObservableBase
+            // mira que el value sea igual que la ref, si no cambia, no hace nada, si no, pues lo cambia
         } 
         public string NomComplet { get => Nom + " " + Cognom; } // así ya devuelve el cambio del nombre completo
 
