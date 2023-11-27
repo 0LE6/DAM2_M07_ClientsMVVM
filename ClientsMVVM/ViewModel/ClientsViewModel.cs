@@ -80,16 +80,37 @@ namespace ClientsMVVM.ViewModel
                 );
 
             // TODO : Confirma
-
+            ConfirmaEdicioCommand = new RelayCommand(
+                obj => ConfirmaCliente(),
+                obj => EsValid
+                );
 
             // TODO : Descarta
 
             #endregion
         }
 
+        private void ConfirmaCliente()
+        {
+            // logica de implmentación de la confirmación de un cliente
+        }
+
         private void EditaClient()
         {
-            
+            // Lógica de implmentación de la edición de un cliente
+
+            // Seleccionamos un cliente
+            Client clientAModificar = Clients[Posicio];
+
+            // Editamos sus propiedades
+            clientAModificar.Nom = Nom;
+            clientAModificar.Cognom = Cognom;
+            clientAModificar.Saldo = Convert.ToDecimal(Saldo);
+
+            // Lo enviamos a las modificaciones
+            repositoriDeClients.Modifica(clientAModificar);
+            Clients = repositoriDeClients.Obten();
+
         }
 
         private bool EsValid 
