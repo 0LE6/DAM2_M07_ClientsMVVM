@@ -40,8 +40,8 @@
             <Button Content="Crea clients" Command="{Binding CreaClientsCommand}" CommandParameter="3"/> <!-- by default 3 -->
             <Separator/>
             <Button Content="Afegeix" Command="{Binding AfegeixClientCommand}" />
-            <Button Content="Edita"  />
-            <Button Content="Confirma" Command="{Binding EditaClientCommand}"/>
+            <Button Content="Edita" Command="{Binding EditaClientCommand}" />
+            <Button Content="Confirma" Command="{Binding ConfirmaEdicioCommand}"/>
             <Button Content="Descarta" Command="{Binding DescartaEdicioCommand}"/>
             <Button Content="Elimina" Command="{Binding EliminaClientCommand}"/>
         </ToolBar>

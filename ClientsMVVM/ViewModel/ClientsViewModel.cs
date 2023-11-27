@@ -15,7 +15,7 @@ namespace ClientsMVVM.ViewModel
     /* TODO (before 28/11/2023):
      * [] Edita
      * [] Confirma
-     * [] Descarta
+     * [X] Descarta
      */
     // Añadimos la interficie de que nuestra propiedad sabe notificar los cambios
     public class ClientsViewModel : ObservableBase // mirar este cambios en los commits, antes era -> INotifyPropertyChanged
@@ -96,14 +96,13 @@ namespace ClientsMVVM.ViewModel
         private void DescartaCliente()
         {
             Nom = ""; Cognom = ""; Saldo = "";
-
-
         }
 
         private void ConfirmaCliente()
         {
             // logica de implmentación de la confirmación de un cliente
 
+            Clients = repositoriDeClients.Obten();
         }
 
         private void EditaClient()
@@ -113,6 +112,10 @@ namespace ClientsMVVM.ViewModel
             // Seleccionamos un cliente
             Client clientAModificar = Clients[Posicio];
 
+            Nom = clientAModificar.Nom;
+            Cognom = clientAModificar.Cognom;
+            Saldo = clientAModificar.Saldo.ToString();
+
             // Editamos sus propiedades
             clientAModificar.Nom = Nom;
             clientAModificar.Cognom = Cognom;
@@ -120,7 +123,7 @@ namespace ClientsMVVM.ViewModel
 
             // Lo enviamos a las modificaciones
             repositoriDeClients.Modifica(clientAModificar);
-            Clients = repositoriDeClients.Obten();
+            //Clients = repositoriDeClients.Obten();
 
         }
 
