@@ -11,6 +11,12 @@ using System.Windows.Input;
 
 namespace ClientsMVVM.ViewModel
 {
+
+    /* TODO (before 28/11/2023):
+     * [] Edita
+     * [] Confirma
+     * [] Descarta
+     */
     // Añadimos la interficie de que nuestra propiedad sabe notificar los cambios
     public class ClientsViewModel : ObservableBase // mirar este cambios en los commits, antes era -> INotifyPropertyChanged
     {
@@ -67,8 +73,23 @@ namespace ClientsMVVM.ViewModel
                 obj => EsValid
                 );
 
+            // TODO : Edita
+            EditaClientCommand = new RelayCommand(
+                obj => EditaClient(),
+                obj => EsValid
+                );
+
+            // TODO : Confirma
+
+
+            // TODO : Descarta
 
             #endregion
+        }
+
+        private void EditaClient()
+        {
+            
         }
 
         private bool EsValid 
