@@ -95,7 +95,8 @@ namespace ClientsMVVM.ViewModel
 
         private void DescartaCliente()
         {
-            // logica de implmentación de la descartación de un cliente
+            Nom = ""; Cognom = ""; Saldo = "";
+
 
         }
 
