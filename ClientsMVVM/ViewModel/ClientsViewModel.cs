@@ -86,18 +86,28 @@ namespace ClientsMVVM.ViewModel
                 );
 
             // TODO : Descarta
-
+            DescartaEdicioCommand = new RelayCommand(
+                obj => DescartaCliente(),
+                obj => Nom != "" || Cognom != "" || Saldo != ""
+                );
             #endregion
+        }
+
+        private void DescartaCliente()
+        {
+            // logica de implmentación de la descartación de un cliente
+
         }
 
         private void ConfirmaCliente()
         {
             // logica de implmentación de la confirmación de un cliente
+
         }
 
         private void EditaClient()
         {
-            // Lógica de implmentación de la edición de un cliente
+            // Lógica de implementación de la edición de un cliente
 
             // Seleccionamos un cliente
             Client clientAModificar = Clients[Posicio];
