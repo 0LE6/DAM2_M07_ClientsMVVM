@@ -21,59 +21,88 @@ namespace ClientsMVVM.ViewModel
             Clients = repositoriDeClients.Obten();
         }
 
+        private bool ValidaDades()
+        {
+            decimal saldo;
+
+            return (
+                !string.IsNullOrEmpty(Nom) &&
+                !string.IsNullOrEmpty(Cognom) &&
+                Decimal.TryParse(Saldo, out saldo)
+                );
+        }
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ConfirmaEdicioCommand))]
+        bool esValid;
+
         // Ponemos una anotación de ObservableProperty (la clase tiene que ser PARCIAL)
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(NomComplet))]
+        [NotifyCanExecuteChangedFor(nameof(AfageixClientNouCommand))]
         string nom;
 
-        [ObservableProperty]
-        string cognom;
+        partial void OnNomChanged(string value)
+        {
+            EsValid = ValidaDades();
+        }
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(NomComplet))]
+        [NotifyCanExecuteChangedFor(nameof(AfageixClientNouCommand))]
+        string cognom;
+
+        partial void OnCognomChanged(string value)
+        {
+            EsValid = ValidaDades();
+        }
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(AfageixClientNouCommand))]
         string saldo;
+
+        partial void OnSaldoChanged(string value)
+        {
+            EsValid = ValidaDades();
+        }
 
         [ObservableProperty]
         ObservableCollection<Client> clients;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(EditaClientCommand))]
+        [NotifyCanExecuteChangedFor(nameof(EliminaClientCommand))]
         int posicio;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(EditaClientCommand))]
+        [NotifyCanExecuteChangedFor(nameof(DescartaEdicioCommand))]
+        [NotifyCanExecuteChangedFor(nameof(ConfirmaEdicioCommand))]
         bool estemEditant = false; // para editar
 
         Client clientEnEdicio;
         IRepositoriDeClients repositoriDeClients;
 
+        public string NomComplet { get => Nom + " " + Cognom; }
+
         // ------------------------------------------------------
 
         #region CODI DELS COMMANDS
 
-        private bool PotDescartarEdicio()
-        {
-            return EstemEditant;
-        }
-
-        private bool PotConfirmarEdicio()
-        {
-            return EstemEditant;
-        }
-
-
-        private bool PotAfegirClient()
-        {
-            return EsValid && true;
-        }
-
-        private bool PotEliminarClient()
-        {
-            return Posicio != -1;
-        }
-
+        [RelayCommand (CanExecute = nameof(PotDescartarEdicio))]
         private void DescartaEdicio()
         {
             EstemEditant = false;
             Nom = ""; Cognom = ""; Saldo = "";
         }
+        private bool PotDescartarEdicio()
+        {
+            return EstemEditant;
+        }
 
+        // --------------------------------------------------------------------------------
+
+        [RelayCommand (CanExecute = nameof(PotConfirmarEdicio))]
         private void ConfirmaEdicio()
         {
             // lógica de implmentación de la confirmación de un cliente
@@ -92,22 +121,18 @@ namespace ClientsMVVM.ViewModel
             Nom = ""; Cognom = ""; Saldo = "";
         }
 
-        
-
-        private bool EsValid
+        private bool PotConfirmarEdicio()
         {
-            get
-            {
-                decimal saldo;
-
-                return (
-                    !string.IsNullOrEmpty(Nom) &&
-                    !string.IsNullOrEmpty(Cognom) &&
-                    Decimal.TryParse(Saldo, out saldo)
-                    );
-            }
+            return EstemEditant;
         }
 
+        // --------------------------------------------------------------------------------
+       
+        
+
+        // --------------------------------------------------------------------------------
+
+        [RelayCommand (CanExecute = nameof(PotAfegirClient))]
         private void AfageixClientNou()
         {
             Client clientNou = new Client()
@@ -120,7 +145,14 @@ namespace ClientsMVVM.ViewModel
             repositoriDeClients.Afegeix(clientNou);
             Clients = repositoriDeClients.Obten(); // refrescar lista de clients
         }
+        private bool PotAfegirClient()
+        {
+            return EsValid && true;
+        }
 
+        // --------------------------------------------------------------------------------
+
+        [RelayCommand (CanExecute = nameof(PotEliminarClient))]
         private void EliminaClient()
         {
             repositoriDeClients.Esborra(Clients[Posicio].Id);
@@ -130,12 +162,17 @@ namespace ClientsMVVM.ViewModel
             }
             Clients = repositoriDeClients.Obten(); // refrescar lista de clients
         }
+        private bool PotEliminarClient()
+        {
+            return Posicio != -1;
+        }
 
+        // --------------------------------------------------------------------------------
         // Ya tenemos el command pasado
         [RelayCommand (CanExecute = nameof(PotCrearClients))]
-        private void CreaClients(int nClients)
+        private void CreaClients(string nClients)
         {
-            repositoriDeClients.CreaClients(nClients);
+            repositoriDeClients.CreaClients(Convert.ToInt32(nClients));
             Clients = repositoriDeClients.Obten(); // refrescar lista de clients
         }
 
@@ -144,6 +181,7 @@ namespace ClientsMVVM.ViewModel
             return Clients.Count == 0;
         }
 
+        // --------------------------------------------------------------------------------
         // Command EditarClient
         [RelayCommand (CanExecute = nameof(PotEditarClient))]
         private void EditaClient()
