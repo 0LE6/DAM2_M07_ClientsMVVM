@@ -57,10 +57,6 @@ namespace ClientsMVVM.ViewModel
             return EstemEditant;
         }
 
-        private bool PotEditarClient()
-        {
-            return !EstemEditant && Posicio != -1; // si no estamos editando, se puede editar
-        }
 
         private bool PotAfegirClient()
         {
@@ -70,11 +66,6 @@ namespace ClientsMVVM.ViewModel
         private bool PotEliminarClient()
         {
             return Posicio != -1;
-        }
-
-        private bool PotCrearClients()
-        {
-            return Clients.Count == 0;
         }
 
         private void DescartaEdicio()
@@ -101,14 +92,7 @@ namespace ClientsMVVM.ViewModel
             Nom = ""; Cognom = ""; Saldo = "";
         }
 
-        private void EditaClient()
-        {
-            EstemEditant = true;
-            clientEnEdicio = new Client { Id = Clients[Posicio].Id }; // !!!
-            Nom = Clients[Posicio].Nom;
-            Cognom = Clients[Posicio].Cognom;
-            Saldo = Clients[Posicio].Saldo.ToString();
-        }
+        
 
         private bool EsValid
         {
@@ -155,6 +139,26 @@ namespace ClientsMVVM.ViewModel
             Clients = repositoriDeClients.Obten(); // refrescar lista de clients
         }
 
+        private bool PotCrearClients()
+        {
+            return Clients.Count == 0;
+        }
+
+        // Command EditarClient
+        [RelayCommand (CanExecute = nameof(PotEditarClient))]
+        private void EditaClient()
+        {
+            EstemEditant = true;
+            clientEnEdicio = new Client { Id = Clients[Posicio].Id }; // !!!
+            Nom = Clients[Posicio].Nom;
+            Cognom = Clients[Posicio].Cognom;
+            Saldo = Clients[Posicio].Saldo.ToString();
+        }
+
+        private bool PotEditarClient()
+        {
+            return !EstemEditant && Posicio != -1; // si no estamos editando, se puede editar
+        }
         #endregion
     }
 }
