@@ -26,6 +26,8 @@ namespace ClientsMVVM.ViewModel
         ObservableCollection<Client> clients;
         IRepositoriDeClients repositoriDeClients;
         int posicio;
+        bool estemEditant = false; // para editar
+
 
         public ICommand CreaClientsCommand { get; set; }
         public ICommand AfegeixClientCommand { get; set; }
@@ -45,7 +47,7 @@ namespace ClientsMVVM.ViewModel
         //}
 
 
-        public ClientsViewModel() 
+        public ClientsViewModel()
         {
             repositoriDeClients = Repo.ObreBDClients();
 
@@ -59,30 +61,30 @@ namespace ClientsMVVM.ViewModel
 
             CreaClientsCommand = new RelayCommand<string>(
                 nClients => CreaClients(Convert.ToInt32(nClients)),
-                nClients => Clients.Count == 0
+                nClients => PotCrearClients()
                 ); // pasamos string que luego convertiremos a int, la segunta parte es un CanExecute (!= para que pueda eliminar, luego se cambiará)
 
             // Selected index del listBox
             EliminaClientCommand = new RelayCommand(
                 obj => EliminaClient(), //repositoriDeClients.Esborra(Clients[Posicio].Id) // le pasamos la id del cliente segun su posicion de la lista 
-                obj => Posicio != -1 // CanExecute siempre y cuando haya alguno seleccionado, -1 significa que no hay ninguno
+                obj => PotEliminarClient() // CanExecute siempre y cuando haya alguno seleccionado, -1 significa que no hay ninguno
                 );
 
             AfegeixClientCommand = new RelayCommand(
                 obj => AfageixClientNou(),
-                obj => EsValid
+                obj => PotAfegirClient()
                 );
 
             // TODO : Edita
             EditaClientCommand = new RelayCommand(
                 obj => EditaClient(),
-                obj => EsValid
+                obj => PotEditarClient()
                 );
 
             // TODO : Confirma
             ConfirmaEdicioCommand = new RelayCommand(
-                obj => ConfirmaCliente(),
-                obj => EsValid
+                obj => ConfirmaEdicio(),
+                obj => PotConfirmarODescartarEdicion()
                 );
 
             // TODO : Descarta
@@ -93,12 +95,42 @@ namespace ClientsMVVM.ViewModel
             #endregion
         }
 
+        #region CODI DELS COMMANDS
+
+        private bool PotConfirmarODescartarEdicion()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        
+        private bool PotEditarClient()
+        {
+            return !EstemEditant && Posicio != -1; // si no estamos editando, se puede editar
+        }
+
+        
+        private bool PotAfegirClient()
+        {
+            return EsValid && true;
+        }
+
+        private bool PotEliminarClient()
+        {
+            return Posicio != -1;
+        }
+
+        private bool PotCrearClients()
+        {
+            return Clients.Count == 0;
+        }
+
         private void DescartaCliente()
         {
             Nom = ""; Cognom = ""; Saldo = "";
         }
 
-        private void ConfirmaCliente()
+        private void ConfirmaEdicio()
         {
             // logica de implmentación de la confirmación de un cliente
 
@@ -107,24 +139,10 @@ namespace ClientsMVVM.ViewModel
 
         private void EditaClient()
         {
-            // Lógica de implementación de la edición de un cliente
-
-            // Seleccionamos un cliente
-            Client clientAModificar = Clients[Posicio];
-
-            Nom = clientAModificar.Nom;
-            Cognom = clientAModificar.Cognom;
-            Saldo = clientAModificar.Saldo.ToString();
-
-            // Editamos sus propiedades
-            clientAModificar.Nom = Nom;
-            clientAModificar.Cognom = Cognom;
-            clientAModificar.Saldo = Convert.ToDecimal(Saldo);
-
-            // Lo enviamos a las modificaciones
-            repositoriDeClients.Modifica(clientAModificar);
-            //Clients = repositoriDeClients.Obten();
-
+            EstemEditant = true;
+            Nom = Clients[Posicio].Nom;
+            Cognom = Clients[Posicio].Cognom;
+            Saldo = Clients[Posicio].Saldo.ToString();
         }
 
         private bool EsValid 
@@ -170,6 +188,8 @@ namespace ClientsMVVM.ViewModel
             repositoriDeClients.CreaClients(nClients);
             Clients = repositoriDeClients.Obten(); // refrescar lista de clients
         }
+
+        #endregion
 
         #region PROPIEDADES
 
@@ -221,6 +241,8 @@ namespace ClientsMVVM.ViewModel
             public string NomComplet { get => Nom + " " + Cognom; } // así ya devuelve el cambio del nombre completo
 
         */
+
+        public bool EstemEditant { get => estemEditant; set { SetProperty(ref estemEditant, value); } }
         #endregion
     }
 }
