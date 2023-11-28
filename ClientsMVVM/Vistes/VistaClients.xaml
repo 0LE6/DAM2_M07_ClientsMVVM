@@ -70,7 +70,36 @@
         <ListBox Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" 
                  ItemsSource="{Binding Clients}"
                  SelectedIndex="{Binding Posicio}"
-                 x:Name="lstClients" HorizontalContentAlignment="Stretch"/>
+                 x:Name="lstClients" HorizontalContentAlignment="Stretch">
+            <!--- Importante cñase 28/11/23-->
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="DarkOliveGreen" BorderThickness="2" CornerRadius="15">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Source="{Binding Foto}"
+                                   Height="50" Width="75" Margin="3" />
+                            <TextBlock Grid.Column="1" Grid.Row="0"
+                                       Text="{Binding Nom}" FontSize="15" FontWeight="Medium"/>
+                            <TextBlock Grid.Column="1" Grid.Row="1"
+                                       Text="{Binding Cognom}" FontSize="15" FontWeight="Medium"/>
+                            <TextBlock Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+                                       Text="{Binding Saldo}" FontSize="15" FontWeight="Medium" VerticalAlignment="Center"/>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <!-- importante el SelectedIndex para saber la poscion del que se selecciona -->
     </Grid>
 </Window>

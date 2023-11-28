@@ -13,6 +13,8 @@ namespace ClientsMVVM.Model
         string cognom;
         decimal saldo;
 
+        // Añadir foto
+        public string Foto {  get; set; }
         public string Id { get => id; set => id = value; }
         public string Nom { get => nom; set => nom = value; }
         public string Cognom { get => cognom; set => cognom = value; }

@@ -38,8 +38,10 @@ namespace ClientsMVVM.Dades.Json
                     Id = Guid.NewGuid().ToString(),
                     Nom = noms[random.Next(noms.Count)],
                     Cognom = cognoms[random.Next(cognoms.Count)],
-                    Saldo = random.Next(-100000, 100000)
+                    Saldo = random.Next(-100000, 100000)                    
                 };
+
+                clientActual.Foto = $"https://loremflickr.com/300/300/spain?lock={clientActual.Id.GetHashCode() % 113}"; // cuando creas automaticamente
                 clients.Add(clientActual);
             }
 
@@ -133,8 +135,10 @@ namespace ClientsMVVM.Dades.Json
             bool afegit = false;
             ObservableCollection<Client> clients = Obten();
             Client clientModificable = clients.FirstOrDefault(clientActual => clientActual.Id == client.Id);
+            
             if (clientModificable == null)
             {
+                client.Foto = $"https://loremflickr.com/300/300/spain?lock={client.Id.GetHashCode() % 113}"; // cuando creas a mano clientes, antes de que el cliente exista
                 clients.Add(client);
                 afegit = true;
             }
