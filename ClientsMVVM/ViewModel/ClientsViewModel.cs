@@ -90,13 +90,17 @@ namespace ClientsMVVM.ViewModel
 
             // TODO : Descarta
             DescartaEdicioCommand = new RelayCommand(
-                obj => DescartaCliente(),
-                obj => Nom != "" || Cognom != "" || Saldo != ""
+                obj => DescartaEdicio(),
+                obj => PotDescartarEdicio()
                 );
             #endregion
         }
 
         #region CODI DELS COMMANDS
+        private bool PotDescartarEdicio()
+        {
+            return EstemEditant;
+        }
 
         private bool PotConfirmarEdicio()
         {
@@ -126,8 +130,9 @@ namespace ClientsMVVM.ViewModel
             return Clients.Count == 0;
         }
 
-        private void DescartaCliente()
+        private void DescartaEdicio()
         {
+            EstemEditant = false;
             Nom = ""; Cognom = ""; Saldo = "";
         }
 
@@ -141,7 +146,7 @@ namespace ClientsMVVM.ViewModel
             clientEnEdicio.Saldo = Convert.ToDecimal(Saldo);
             repositoriDeClients.Modifica(clientEnEdicio);
 
-            // una vez modificado, se obtinee
+            // una vez modificado, se obtiene
             Clients = repositoriDeClients.Obten();
             EstemEditant = false;
         }
