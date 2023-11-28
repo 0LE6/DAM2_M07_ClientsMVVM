@@ -77,3 +77,60 @@ namespace ClientsMVVM.Converters
     }
 }
 ```
+
+---------
+
+![image](https://github.com/0LE6/DAM2_M07_ClientsMVVM/assets/135649528/7fae07bf-a4cc-44d5-bcdb-657df0f53e91)
+
+``` csharp
+using CommunityToolkit.Mvvm.ComponentModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace ClientsMVVM.ViewModel
+{
+    public class FrameworkClientViewModel : ObservableObject
+    {
+
+    }
+}
+
+```
+![image](https://github.com/0LE6/DAM2_M07_ClientsMVVM/assets/135649528/3a00824b-d6d8-4dec-8479-a7714791f4aa)
+
+``` csharp
+using ClientsMVVM.Model;
+using ClientsMVVM.Repositori;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace ClientsMVVM.ViewModel
+{
+    partial class FrameworkClientViewModel : ObservableObject
+    {
+        // Ponemos una anotación de ObservableProperty (la clase tiene que ser PARCIAL)
+        [ObservableProperty]
+
+        string nom;
+        string cognom;
+        string saldo;
+        ObservableCollection<Client> clients;
+        IRepositoriDeClients repositoriDeClients;
+        int posicio;
+        bool estemEditant = false; // para editar
+        Client clientEnEdicio;
+
+
+    }
+}
+```
