@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientsMVVM.Vistes"
         xmlns:viewmodel="clr-namespace:ClientsMVVM.ViewModel"
+        xmlns:converters="clr-namespace:ClientsMVVM.Converters" 
         mc:Ignorable="d"
         Title="VistaClients" Height="450" Width="800" 
         > 
@@ -22,6 +23,8 @@
             <Setter Property="Control.FontSize" Value="25"/>
             <Setter Property="Control.FontWeight" Value="DemiBold"/>
         </Style>
+        <converters:ColorConverter x:Key="ColorConverter"/>
+        <converters:ImatgeConverter x:Key="ImatgeConverter"/>
     </Window.Resources>
 
     <Grid>
@@ -78,7 +81,14 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Saldo}" FontWeight="ExtraBlack"
-                                           Foreground="DarkTurquoise"/>
+                                           Foreground="{Binding Saldo, Converter={StaticResource ColorConverter}}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Marca">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Saldo, Converter={StaticResource ImatgeConverter}}" Height="15" Width="15"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
