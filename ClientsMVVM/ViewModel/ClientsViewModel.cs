@@ -107,13 +107,10 @@ namespace ClientsMVVM.ViewModel
             return EstemEditant;
         }
 
-
-        
         private bool PotEditarClient()
         {
             return !EstemEditant && Posicio != -1; // si no estamos editando, se puede editar
         }
-
         
         private bool PotAfegirClient()
         {
@@ -149,6 +146,9 @@ namespace ClientsMVVM.ViewModel
             // una vez modificado, se obtiene
             Clients = repositoriDeClients.Obten();
             EstemEditant = false;
+
+            // después borrar los datos
+            Nom = ""; Cognom = ""; Saldo = "";
         }
 
         private void EditaClient()
