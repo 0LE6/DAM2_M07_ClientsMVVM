@@ -101,7 +101,7 @@
                  ItemsSource="{Binding Clients}"
                  SelectedIndex="{Binding Posicio}"
                  x:Name="lstClients" HorizontalContentAlignment="Stretch">
-            <!--- Importante cñase 28/11/23-->
+            <!--- Importante clase 28/11/23-->
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Peru" BorderThickness="2" CornerRadius="15">
