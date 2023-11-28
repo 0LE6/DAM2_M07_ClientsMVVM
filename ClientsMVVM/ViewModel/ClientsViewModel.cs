@@ -27,6 +27,7 @@ namespace ClientsMVVM.ViewModel
         IRepositoriDeClients repositoriDeClients;
         int posicio;
         bool estemEditant = false; // para editar
+        Client clientEnEdicio;
 
 
         public ICommand CreaClientsCommand { get; set; }
@@ -84,7 +85,7 @@ namespace ClientsMVVM.ViewModel
             // TODO : Confirma
             ConfirmaEdicioCommand = new RelayCommand(
                 obj => ConfirmaEdicio(),
-                obj => PotConfirmarODescartarEdicion()
+                obj => PotConfirmarEdicio()
                 );
 
             // TODO : Descarta
@@ -97,9 +98,9 @@ namespace ClientsMVVM.ViewModel
 
         #region CODI DELS COMMANDS
 
-        private bool PotConfirmarODescartarEdicion()
+        private bool PotConfirmarEdicio()
         {
-            throw new NotImplementedException();
+            return EstemEditant;
         }
 
 
@@ -132,14 +133,23 @@ namespace ClientsMVVM.ViewModel
 
         private void ConfirmaEdicio()
         {
-            // logica de implmentación de la confirmación de un cliente
+            // lógica de implmentación de la confirmación de un cliente
+            // usamos el clientEnEdicio
 
+            clientEnEdicio.Nom = Nom;
+            clientEnEdicio.Cognom = Cognom;
+            clientEnEdicio.Saldo = Convert.ToDecimal(Saldo);
+            repositoriDeClients.Modifica(clientEnEdicio);
+
+            // una vez modificado, se obtinee
             Clients = repositoriDeClients.Obten();
+            EstemEditant = false;
         }
 
         private void EditaClient()
         {
             EstemEditant = true;
+            clientEnEdicio = new Client { Id = Clients[Posicio].Id }; // !!!
             Nom = Clients[Posicio].Nom;
             Cognom = Clients[Posicio].Cognom;
             Saldo = Clients[Posicio].Saldo.ToString();
