@@ -11,7 +11,7 @@
         > 
     <!-- importante para hacer el new, al principio parece que no funciona, pero funciona  -->
     <Window.DataContext>
-        <viewmodel:ClientsViewModel/>
+        <viewmodel:FrameworkClientViewModel/>
     </Window.DataContext>
     
     <Window.Resources>
@@ -88,7 +88,8 @@
                     <GridViewColumn Header="Marca">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding Saldo, Converter={StaticResource ImatgeConverter}}" Height="15" Width="15"/>
+                                <Image Source="{Binding Saldo, Converter={StaticResource ImatgeConverter}}" 
+                                       Height="15" Width="15"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
