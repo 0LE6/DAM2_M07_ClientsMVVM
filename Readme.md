@@ -1,6 +1,6 @@
 "# Clients MVVM" 
 
-Hayq ue instalar el communitytool kit mvvm
+Hay que instalar el communitytool kit mvvm
 
 ![image](https://github.com/0LE6/DAM2_M07_ClientsMVVM/assets/135649528/fd4b1d03-b1a9-488a-bd03-a82bf441d4d3)
 
@@ -261,6 +261,6 @@ private void CreaClients(int nClients)
 
 Ahora pasamos los commands:
 
-ponemos los atriburos, las propiedades y decimos que puedan notificar
+ponemos los atributos, las propiedades y decimos que puedan notificar
 
 cambiar los nombres de los binding despues de pasar los commands
