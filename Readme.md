@@ -134,3 +134,127 @@ namespace ClientsMVVM.ViewModel
     }
 }
 ```
+
+``` csharp
+// Copiamos esto del ClientsViewModel
+public FrameworkClientViewModel()
+{
+    repositoriDeClients = Repo.ObreBDClients();
+    Clients = repositoriDeClients.Obten();
+}
+```
+![image](https://github.com/0LE6/DAM2_M07_ClientsMVVM/assets/135649528/749c1103-b88c-4a6b-8a12-e2c2f91c0982)
+
+Ahora pasamos toda la region de CODI DEL COMMANDS
+
+``` chsarp
+#region CODI DELS COMMANDS
+private bool PotDescartarEdicio()
+{
+    return EstemEditant;
+}
+
+private bool PotConfirmarEdicio()
+{
+    return EstemEditant;
+}
+
+private bool PotEditarClient()
+{
+    return !EstemEditant && Posicio != -1; // si no estamos editando, se puede editar
+}
+
+private bool PotAfegirClient()
+{
+    return EsValid && true;
+}
+
+private bool PotEliminarClient()
+{
+    return Posicio != -1;
+}
+
+private bool PotCrearClients()
+{
+    return Clients.Count == 0;
+}
+
+private void DescartaEdicio()
+{
+    EstemEditant = false;
+    Nom = ""; Cognom = ""; Saldo = "";
+}
+
+private void ConfirmaEdicio()
+{
+    // lógica de implmentación de la confirmación de un cliente
+    // usamos el clientEnEdicio
+
+    clientEnEdicio.Nom = Nom;
+    clientEnEdicio.Cognom = Cognom;
+    clientEnEdicio.Saldo = Convert.ToDecimal(Saldo);
+    repositoriDeClients.Modifica(clientEnEdicio);
+
+    // una vez modificado, se obtiene
+    Clients = repositoriDeClients.Obten();
+    EstemEditant = false;
+
+    // después borrar los datos
+    Nom = ""; Cognom = ""; Saldo = "";
+}
+
+private void EditaClient()
+{
+    EstemEditant = true;
+    clientEnEdicio = new Client { Id = Clients[Posicio].Id }; // !!!
+    Nom = Clients[Posicio].Nom;
+    Cognom = Clients[Posicio].Cognom;
+    Saldo = Clients[Posicio].Saldo.ToString();
+}
+
+private bool EsValid 
+{ 
+    get {
+        decimal saldo;
+
+        return (
+            !string.IsNullOrEmpty(Nom) &&
+            !string.IsNullOrEmpty(Cognom) &&
+            Decimal.TryParse(Saldo, out saldo)
+            );
+    } 
+}
+
+private void AfageixClientNou()
+{
+    Client clientNou = new Client()
+    {
+        Id = Guid.NewGuid().ToString(), // lol ... genera clave aleatoria
+        Nom = Nom,
+        Cognom = Cognom,
+        Saldo = Convert.ToDecimal(Saldo)
+    };
+    repositoriDeClients.Afegeix(clientNou);
+    Clients = repositoriDeClients.Obten(); // refrescar lista de clients
+}
+
+private void EliminaClient()
+{
+    repositoriDeClients.Esborra(Clients[Posicio].Id);
+    if (posicio == Clients.Count - 1)
+    {
+        Posicio--; // que se quede en la anterior
+    }
+    Clients = repositoriDeClients.Obten(); // refrescar lista de clients
+}
+
+// otra forma de hacerlo:
+// nClients => repositoriDeClients.CreaClients(Convert.ToInt32(nClients)));
+private void CreaClients(int nClients)
+{
+    repositoriDeClients.CreaClients(nClients);
+    Clients = repositoriDeClients.Obten(); // refrescar lista de clients
+}
+
+#endregion
+```
